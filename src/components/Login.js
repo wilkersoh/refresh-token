@@ -48,6 +48,8 @@ const Login = () => {
 			setUser("");
 			setPwd("");
 
+			// back to where they was after login
+			console.log("from :>> ", from);
 			navigate(from, { replace: true });
 		} catch (err) {
 			if (!err?.response) setErrMsg("No Server Response");
