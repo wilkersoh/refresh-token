@@ -18,12 +18,10 @@ const Users = () => {
 				const response = await axiosPrivate.get("/users", {
 					signal: controller.signal,
 				});
-
 				console.log(response.data);
 				isMounted && setUsers(response.data);
-			} catch (error) {
-				console.error("user component: ", error);
-				// back to where they was after login
+			} catch (err) {
+				console.error(err);
 				navigate("/login", { state: { from: location }, replace: true });
 			}
 		};
@@ -32,7 +30,7 @@ const Users = () => {
 
 		return () => {
 			isMounted = false;
-			controller.abort();
+			// controller.abort();
 		};
 	}, []);
 
