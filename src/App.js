@@ -28,7 +28,11 @@ const App = () => {
 				<Route path="linkpage" element={<LinkPage />} />
 				<Route path="unauthorized" element={<Unauthorized />} />
 
-				{/* we want to protect these routes */}
+				{/* we want to protect these routes
+
+					RequireAuth -> handle redirect to login page if not allowedRoles
+
+				*/}
 				<Route element={<PersistLogin />}>
 					<Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
 						<Route path="/" element={<Home />} />

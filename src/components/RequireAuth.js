@@ -5,13 +5,18 @@ const RequireAuth = ({ allowedRoles }) => {
 	const { auth } = useAuth();
 	const location = useLocation();
 
-	return auth?.roles?.find((role) => allowedRoles?.includes(role)) ? (
-		<Outlet />
-	) : auth?.user ? (
-		<Navigate to="/unauthorized" state={{ from: location }} replace />
-	) : (
-		<Navigate to="/login" state={{ from: location }} replace />
-	);
+	if (auth?.roles?.find((role) => allowedRoles?.includes(role))) {
+		console.log("first reuireAuth");
+		return <Outlet />;
+	}
+
+	if (auth?.user) {
+		console.log("second reuireAuth");
+		return <Navigate to="/unauthorized" state={{ from: location }} replace />;
+	}
+
+	console.log("last reuireAuth");
+	return <Navigate to="/login" state={{ from: location }} replace />;
 };
 
 export default RequireAuth;

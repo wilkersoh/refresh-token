@@ -30,12 +30,12 @@ const PersistLogin = () => {
 	const [isLoading, setIsLoading] = useState(true);
 	const refresh = useRefreshToken();
 	const { auth, persist } = useAuth();
-
+	console.log("auth: persistlogin :>> ", auth);
 	useEffect(() => {
 		let isMounted = true;
+
 		const verifyRefreshToken = async () => {
 			try {
-				console.log("----- call persistLogin refresh token");
 				await refresh();
 			} catch (error) {
 				console.error(error);
@@ -46,17 +46,16 @@ const PersistLogin = () => {
 		};
 
 		// no accessToken call RefreshToken Fn
-		!auth?.accessToken ? verifyRefreshToken() : setIsLoading(false);
+		if (!auth?.accessToken) {
+			verifyRefreshToken();
+		} else {
+			setIsLoading(false);
+		}
 
 		return () => {
 			isMounted = false;
 		};
 	}, []);
-
-	useEffect(() => {
-		console.log("is Loading: ", isLoading);
-		console.log("is auth: ", JSON.stringify(auth?.accessToken));
-	}, [isLoading]);
 
 	return (
 		<>{!persist ? <Outlet /> : isLoading ? <p>Loading....</p> : <Outlet />}</>

@@ -18,7 +18,6 @@ const Login = () => {
 	const [user, setUser] = useState("");
 	const [pwd, setPwd] = useState("");
 	const [errMsg, setErrMsg] = useState("");
-
 	useEffect(() => {
 		userRef.current.focus();
 	}, []);
@@ -53,7 +52,6 @@ const Login = () => {
 			setPwd("");
 
 			// back to where they was after login
-			console.log("from :>> ", from);
 			navigate(from, { replace: true });
 		} catch (err) {
 			if (!err?.response) setErrMsg("No Server Response");
@@ -84,7 +82,7 @@ const Login = () => {
 				<input
 					type="text"
 					id="username"
-					placeholder="Dave"
+					placeholder="admin"
 					ref={userRef}
 					autoComplete="off"
 					onChange={(e) => setUser(e.target.value)}
@@ -96,7 +94,7 @@ const Login = () => {
 				<input
 					type="password"
 					id="password"
-					placeholder="!Dd12345"
+					placeholder="S!mple01"
 					onChange={(e) => setPwd(e.target.value)}
 					value={pwd}
 					required
