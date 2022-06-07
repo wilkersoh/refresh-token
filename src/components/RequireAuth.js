@@ -14,9 +14,9 @@ const RequireAuth = ({ allowedRoles }) => {
 	}
 
 	if (auth?.user) {
-		console.log("second reuireAuth");
 		return <Navigate to="/unauthorized" state={{ from: location }} replace />;
 	}
+
 	return <Navigate to="/login" state={{ from: location }} replace />;
 };
 
