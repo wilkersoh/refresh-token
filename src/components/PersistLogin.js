@@ -60,6 +60,22 @@ const PersistLogin = () => {
 	}, []);
 
 	return (
+		/**
+		 * !persist ( not Checked Trust This Device )
+		 * Flow:
+		 * 1. Login -> access to other page
+		 * 2. Refresh -> auth became empty
+		 * 3. Trigger useEffect API
+		 * 4. !persist -> Straight return Outlet -> Hit RequireAuth -> Kick Out
+		 * 5. UseEffect API Return
+		 *
+		 * persist
+		 * Flow:
+		 * 1. Login -> access to other page
+		 * 2. Refresh -> auth became empty
+		 * 3. Trigger useEffect API
+		 * 4. persist -> isLoading ( waiting Refresh Token Return ) -> Hit RequireAuth -> Remain Same Page
+		 */
 		<>{!persist ? <Outlet /> : isLoading ? <p>Loading....</p> : <Outlet />}</>
 	);
 };

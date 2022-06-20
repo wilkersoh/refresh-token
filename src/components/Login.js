@@ -39,7 +39,6 @@ const Login = () => {
 				LOGIN_URL,
 				JSON.stringify({ user, pwd }),
 				{
-					headers: { "Content-Type": "application/json" },
 					withCredentials: true,
 				}
 			);
