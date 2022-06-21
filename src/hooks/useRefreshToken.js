@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import useAuth from "./useAuth";
 import axios from "../api/axios";
+import jwt_decode from "jwt-decode";
 
 const useRefreshToken = () => {
 	const { setAuth } = useAuth();
@@ -10,11 +11,15 @@ const useRefreshToken = () => {
 			withCredentials: true,
 		});
 
+		const decoded = response?.data.accessToken
+			? jwt_decode(response.data.accessToken)
+			: undefined
+
 		setAuth((prev) => {
 			return {
 				...prev,
-				roles: response.data.roles,
-				accessToken: response.data.accessToken,
+				user: decoded?.UserInfo?.username || '',
+				accessToken: response.data.accessToken
 			};
 		});
 
