@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { useNavigate, useLocation } from "react-router-dom";
-import axios from "../api/axios";
 
 const Users = () => {
 	const [users, setUsers] = useState();
@@ -19,7 +18,9 @@ const Users = () => {
 					signal: controller.signal,
 				});
 
-				isMounted && setUsers(response.data);
+				const userNames = response.data.map( user => user.username );
+
+				isMounted && setUsers(userNames);
 			} catch (err) {
 				console.error(err);
 				navigate("/login", { state: { from: location }, replace: true });
@@ -40,7 +41,7 @@ const Users = () => {
 			{users?.length ? (
 				<ul>
 					{users.map((user, i) => (
-						<li key={i}>{user?.username}</li>
+						<li key={i}>{user}</li>
 					))}
 				</ul>
 			) : (
