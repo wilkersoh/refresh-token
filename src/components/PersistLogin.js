@@ -48,9 +48,9 @@ const PersistLogin = () => {
 		// no accessToken call RefreshToken Fn ( refresh browser lost memory token )
 		if (!auth?.accessToken) {
 			verifyRefreshToken();
-			console.log("----- call verifyRefreshToken ----- ")
+			console.log("----- call verifyRefreshToken ----- ");
 		} else {
-			console.log("----- else  verifyRefreshToken ----- ")
+			console.log("----- else  verifyRefreshToken ----- ");
 			setIsLoading(false);
 		}
 
